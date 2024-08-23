@@ -71,18 +71,17 @@ Matrix get_mat_perspective(float fovy, float aspect, float near, float far) {
     double right = top * aspect;
     double left = -right;
 
-    // MatrixFrustum(-right, right, -top, top, near, far);
-    float rl = (float)(right - left);
-    float tb = (float)(top - bottom);
-    float fn = (float)(far - near);
+    float width = (float)(right - left);
+    float height = (float)(top - bottom);
+    float depth = (float)(far - near);
 
-    result.m0 = ((float)near * 2.0f) / rl;
-    result.m5 = ((float)near * 2.0f) / tb;
-    result.m8 = ((float)right + (float)left) / rl;
-    result.m9 = ((float)top + (float)bottom) / tb;
-    result.m10 = -((float)far + (float)near) / fn;
+    result.m0 = ((float)near * 2.0f) / width;
+    result.m5 = ((float)near * 2.0f) / height;
+    result.m8 = ((float)right + (float)left) / width;
+    result.m9 = ((float)top + (float)bottom) / height;
+    result.m10 = -((float)far + (float)near) / depth;
     result.m11 = -1.0f;
-    result.m14 = -((float)far * (float)near * 2.0f) / fn;
+    result.m14 = -((float)far * (float)near * 2.0f) / depth;
 
     return result;
 }
